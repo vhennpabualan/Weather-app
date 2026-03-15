@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherHub - Welcome</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .welcome-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .welcome-container h1 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .welcome-container p {
+            color: #718096;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .feature-list {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .feature-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 12px;
+            align-items: start;
+        }
+        
+        .feature-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .feature-icon {
+            font-size: 1.5rem;
+            min-width: 30px;
+        }
+        
+        .feature-text {
+            color: #4a5568;
+        }
+        
+        .feature-text strong {
+            color: #2d3748;
+        }
+        
+        .highlight {
+            background: #feebc8;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .info-box {
+            background: #e6fffa;
+            border-left: 4px solid #48bb78;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 25px;
+            color: #22543d;
+        }
+        
+        .info-box strong {
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #2d3748;
+        }
+        
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+        
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .tech-item {
+            text-align: center;
+            padding: 15px;
+            background: #f7fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .tech-item .icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        .tech-item .name {
+            font-size: 0.9rem;
+            color: #4a5568;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-container">
+        <h1>🌤️ Welcome to WeatherHub</h1>
+        <p style="font-size: 1.1rem; margin-bottom: 25px;">Your powerful, beautiful weather app that just works!</p>
+        
+        <div class="info-box">
+            <strong>🎉 Great News!</strong>
+            No API key setup needed. Your app is ready to use immediately with Open-Meteo's free weather data!
+        </div>
+        
+        <h2 style="color: #2d3748; margin-bottom: 15px; font-size: 1.3rem;">✨ What You Get</h2>
+        <div class="feature-list">
+            <div class="feature-item">
+                <span class="feature-icon">🌍</span>
+                <div class="feature-text"><strong>Real-Time Weather</strong> - Always accurate, always current</div>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">📍</span>
+                <div class="feature-text"><strong>Auto-Location</strong> - Browser geolocation for instant local weather</div>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">🔍</span>
+                <div class="feature-text"><strong>City Search</strong> - Find weather for any city worldwide</div>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">📊</span>
+                <div class="feature-text"><strong>Detailed Forecasts</strong> - Hourly & 5-day ahead predictions</div>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">📈</span>
+                <div class="feature-text"><strong>Complete Stats</strong> - Wind, humidity, pressure, UV index & more</div>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">🎨</span>
+                <div class="feature-text"><strong>Beautiful Design</strong> - Works perfectly on mobile, tablet & desktop</div>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">⚡</span>
+                <div class="feature-text"><strong>No API Key</strong> - Uses free Open-Meteo API (unlimited, free forever!)</div>
+            </div>
+        </div>
+        
+        <h2 style="color: #2d3748; margin-bottom: 15px; font-size: 1.3rem;">🛠️ Built With</h2>
+        <div class="tech-stack">
+            <div class="tech-item">
+                <div class="icon">📄</div>
+                <div class="name">HTML5</div>
+            </div>
+            <div class="tech-item">
+                <div class="icon">🎨</div>
+                <div class="name">CSS3</div>
+            </div>
+            <div class="tech-item">
+                <div class="icon">⚙️</div>
+                <div class="name">JavaScript</div>
+            </div>
+            <div class="tech-item">
+                <div class="icon">🌦️</div>
+                <div class="name">Open-Meteo API</div>
+            </div>
+        </div>
+        
+        <div class="buttons">
+            <button class="btn btn-secondary" onclick="window.location.href='README.md'">📖 Read Docs</button>
+            <button class="btn btn-primary" onclick="window.location.href='index.html'">🚀 Launch App</button>
+        </div>
+    </div>
+</body>
+</html>
