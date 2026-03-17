@@ -6,196 +6,246 @@
     <title>WeatherHub - Your Daily Weather Companion</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <!-- Header with Location -->
-        <header class="header">
-            <div id="locationDisplay" style="flex: 1; text-align: left; color: #b0bec5; font-size: 0.95rem;">
-                📍 <span id="headerCity">WeatherHub</span>
-            </div>
-        </header>
-
-        <!-- Search Bar -->
-        <div class="search-container">
-            <div class="search-box">
-                <input 
-                    type="text" 
-                    id="searchInput" 
-                    placeholder="Search for a city..."
-                    autocomplete="off"
-                >
-                <button id="searchBtn" title="Search"><i class="fas fa-search"></i></button>
-                <button id="locationBtn" title="Use my location"><i class="fas fa-location-dot"></i></button>
-            </div>
-            <div id="suggestions" class="suggestions-dropdown"></div>
+    <div class="app-container">
+        <!-- Animated Background -->
+        <div class="background-container">
+            <div class="gradient-mesh gradient-1"></div>
+            <div class="gradient-mesh gradient-2"></div>
+            <div class="gradient-mesh gradient-3"></div>
         </div>
 
-        <!-- Loading Spinner -->
-        <div id="loading" class="loading">
-            <div class="spinner"></div>
-            <p>Loading weather data...</p>
-        </div>
-
-        <!-- Error Message -->
-        <div id="error" class="error-message"></div>
-
-        <!-- Main Weather Display -->
-        <main id="weatherContent" class="weather-content">
-            <!-- Current Weather Card -->
-            <section class="current-weather" id="weatherSection">
-                <div class="city-temp-header">
-                    <h2 id="weatherCityName" class="weather-city-name">--</h2>
-                </div>
-                <div class="weather-main">
-                    <div class="temperature-section">
-                        <img id="weatherIcon" src="" alt="weather icon" class="weather-icon">
-                        <div class="temp-display">
-                            <span id="temperature" class="temperature">--°</span>
-                            <span id="weatherDescription" class="weather-description">--</span>
-                        </div>
+        <!-- Main Content -->
+        <div class="content-wrapper">
+            <!-- Header -->
+            <header class="app-header">
+                <div class="header-top">
+                    <div class="logo">
+                        <i class="fas fa-cloud-sun"></i>
+                        <span>WeatherHub</span>
+                    </div>
+                    <div class="header-actions">
+                        <button id="themeToggle" class="theme-btn" title="Toggle theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
                     </div>
                 </div>
 
-                <div class="quick-stats">
-                    <div class="stat">
-                        <i class="fas fa-droplets"></i>
-                        <span class="stat-label">Humidity</span>
-                        <span id="humidity" class="stat-value">--%</span>
+                <!-- Search Bar -->
+                <div class="search-section">
+                    <div class="search-wrapper">
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            class="search-input" 
+                            placeholder="Search for a city..."
+                            autocomplete="off"
+                        >
+                        <button id="searchBtn" class="search-btn" title="Search">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <button id="locationBtn" class="location-btn" title="Use my location">
+                            <i class="fas fa-location-dot"></i>
+                        </button>
                     </div>
-                    <div class="stat">
-                        <i class="fas fa-wind"></i>
-                        <span class="stat-label">Wind</span>
-                        <span id="windSpeed" class="stat-value">-- km/h</span>
-                    </div>
-                    <div class="stat">
-                        <i class="fas fa-eye"></i>
-                        <span class="stat-label">Visibility</span>
-                        <span id="visibility" class="stat-value">-- km</span>
-                    </div>
-                    <div class="stat">
-                        <i class="fas fa-compress"></i>
-                        <span class="stat-label">Pressure</span>
-                        <span id="pressure" class="stat-value">-- hPa</span>
-                    </div>
+                    <div id="suggestions" class="suggestions-list"></div>
                 </div>
-            </section>
+            </header>
 
-            <!-- Hourly Forecast -->
-            <section class="hourly-forecast">
-                <h3>Next 12 Hours</h3>
-                <div id="hourlyContainer" class="hourly-container">
-                    <!-- Populated by JavaScript -->
+            <!-- Loading State -->
+            <div id="loading" class="loading-container">
+                <div class="loading-spinner">
+                    <div class="spinner-circle"></div>
+                    <div class="spinner-circle"></div>
+                    <div class="spinner-circle"></div>
                 </div>
-            </section>
-
-            <!-- Current Conditions -->
-            <section class="current-conditions">
-                <h3>Conditions</h3>
-                <div class="conditions-grid">
-                    <div class="condition-item">
-                        <div class="condition-icon">💧</div>
-                        <div class="condition-info">
-                            <span class="condition-label">Precipitation</span>
-                            <span id="precipInfo" class="condition-value">-- %</span>
-                        </div>
-                    </div>
-                    <div class="condition-item">
-                        <div class="condition-icon">🌡️</div>
-                        <div class="condition-info">
-                            <span class="condition-label">Feels Like</span>
-                            <span id="feelsLikeInfo" class="condition-value">--°</span>
-                        </div>
-                    </div>
-                    <div class="condition-item">
-                        <div class="condition-icon">☁️</div>
-                        <div class="condition-info">
-                            <span class="condition-label">Cloud Cover</span>
-                            <span id="cloudCover" class="condition-value">-- %</span>
-                        </div>
-                    </div>
-                    <div class="condition-item">
-                        <div class="condition-icon">💨</div>
-                        <div class="condition-info">
-                            <span class="condition-label">Wind Gust</span>
-                            <span id="windGust" class="condition-value">-- km/h</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 5/7-Day Forecast -->
-            <section class="daily-forecast">
-                <h3>7-Day Forecast</h3>
-                <div id="dailyContainer" class="daily-container">
-                    <!-- Populated by JavaScript -->
-                </div>
-            </section>
-
-            <!-- Additional Details -->
-            <section class="additional-details">
-                <div class="detail-card">
-                    <h4><i class="fas fa-sun"></i> Sunrise & Sunset</h4>
-                    <div class="detail-content">
-                        <div>
-                            <p class="detail-label">Sunrise</p>
-                            <p id="sunrise" class="detail-value">--</p>
-                        </div>
-                        <div>
-                            <p class="detail-label">Sunset</p>
-                            <p id="sunset" class="detail-value">--</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="detail-card">
-                    <h4><i class="fas fa-triangle-exclamation"></i> Air Quality</h4>
-                    <div class="detail-content">
-                        <div>
-                            <p class="detail-label">AQI</p>
-                            <p id="aqi" class="detail-value">--</p>
-                        </div>
-                        <div>
-                            <p class="detail-label">Status</p>
-                            <p id="aqiStatus" class="detail-value">--</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="detail-card">
-                    <h4><i class="fas fa-tint"></i> Precipitation</h4>
-                    <div class="detail-content">
-                        <div>
-                            <p class="detail-label">Chance</p>
-                            <p id="precipChance" class="detail-value">--%</p>
-                        </div>
-                        <div>
-                            <p class="detail-label">Amount</p>
-                            <p id="precipAmount" class="detail-value">-- mm</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="detail-card">
-                    <h4><i class="fas fa-water"></i> UV Index</h4>
-                    <div class="detail-content">
-                        <div>
-                            <p class="detail-label">Index</p>
-                            <p id="uvIndex" class="detail-value">--</p>
-                        </div>
-                        <div>
-                            <p class="detail-label">Level</p>
-                            <p id="uvLevel" class="detail-value">--</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Last Updated -->
-            <div class="last-updated">
-                <small id="lastUpdated">Last updated: --</small>
+                <p class="loading-text">Fetching weather data...</p>
             </div>
-        </main>
+
+            <!-- Error State -->
+            <div id="error" class="error-banner"></div>
+
+            <!-- Weather Content -->
+            <main id="weatherContent" class="weather-main">
+                <!-- Current Weather Hero Card -->
+                <section class="hero-card" id="weatherSection">
+                    <div class="hero-location">
+                        <h1 id="weatherCityName" class="location-name">--</h1>
+                        <p id="lastUpdated" class="update-time">--</p>
+                    </div>
+
+                    <div class="hero-weather">
+                        <div class="weather-icon-wrapper">
+                            <img id="weatherIcon" src="" alt="weather" class="weather-icon-large">
+                        </div>
+                        <div class="temperature-block">
+                            <div class="temp-large" id="temperature">--°</div>
+                            <div id="weatherDescription" class="weather-condition">--</div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="quick-stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-icon">💧</div>
+                            <div class="stat-content">
+                                <span class="stat-label">Humidity</span>
+                                <span id="humidity" class="stat-value">--%</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">💨</div>
+                            <div class="stat-content">
+                                <span class="stat-label">Wind</span>
+                                <span id="windSpeed" class="stat-value">-- km/h</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">👁️</div>
+                            <div class="stat-content">
+                                <span class="stat-label">Visibility</span>
+                                <span id="visibility" class="stat-value">-- km</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">⚖️</div>
+                            <div class="stat-content">
+                                <span class="stat-label">Pressure</span>
+                                <span id="pressure" class="stat-value">-- hPa</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Hourly Forecast -->
+                <section class="forecast-section">
+                    <div class="section-header">
+                        <h2 class="section-title">⏰ Next 12 Hours</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <div id="hourlyContainer" class="hourly-scroll">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </section>
+
+                <!-- Detailed Conditions -->
+                <section class="conditions-section">
+                    <div class="section-header">
+                        <h2 class="section-title">🔍 Detailed Conditions</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <div class="conditions-cards">
+                        <div class="condition-card">
+                            <div class="condition-head">
+                                <span class="condition-title">Feels Like</span>
+                                <span class="condition-icon">🌡️</span>
+                            </div>
+                            <div id="feelsLikeInfo" class="condition-large">--°</div>
+                        </div>
+                        <div class="condition-card">
+                            <div class="condition-head">
+                                <span class="condition-title">Cloud Cover</span>
+                                <span class="condition-icon">☁️</span>
+                            </div>
+                            <div id="cloudCover" class="condition-large">--%</div>
+                        </div>
+                        <div class="condition-card">
+                            <div class="condition-head">
+                                <span class="condition-title">Wind Gust</span>
+                                <span class="condition-icon">🌪️</span>
+                            </div>
+                            <div id="windGust" class="condition-large">-- km/h</div>
+                        </div>
+                        <div class="condition-card">
+                            <div class="condition-head">
+                                <span class="condition-title">Precipitation</span>
+                                <span class="condition-icon">🌧️</span>
+                            </div>
+                            <div id="precipInfo" class="condition-large">--%</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7-Day Forecast -->
+                <section class="forecast-section">
+                    <div class="section-header">
+                        <h2 class="section-title">📅 7-Day Forecast</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <div id="dailyContainer" class="daily-forecast">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </section>
+
+                <!-- Additional Details Grid -->
+                <section class="details-grid">
+                    <div class="detail-card">
+                        <div class="detail-icon">🌅</div>
+                        <div class="detail-title">Sunrise & Sunset</div>
+                        <div class="detail-value-group">
+                            <div class="detail-row">
+                                <span class="detail-label">Rise</span>
+                                <span id="sunrise" class="detail-big">--</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Set</span>
+                                <span id="sunset" class="detail-big">--</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-icon">✨</div>
+                        <div class="detail-title">Air Quality</div>
+                        <div class="detail-value-group">
+                            <div class="detail-row">
+                                <span class="detail-label">AQI</span>
+                                <span id="aqi" class="detail-big">--</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Status</span>
+                                <span id="aqiStatus" class="detail-small">--</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-icon">💧</div>
+                        <div class="detail-title">Precipitation</div>
+                        <div class="detail-value-group">
+                            <div class="detail-row">
+                                <span class="detail-label">Chance</span>
+                                <span id="precipChance" class="detail-big">--%</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Amount</span>
+                                <span id="precipAmount" class="detail-small">-- mm</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-icon">☀️</div>
+                        <div class="detail-title">UV Index</div>
+                        <div class="detail-value-group">
+                            <div class="detail-row">
+                                <span class="detail-label">Index</span>
+                                <span id="uvIndex" class="detail-big">--</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Level</span>
+                                <span id="uvLevel" class="detail-small">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Footer Spacing -->
+                <div class="footer-space"></div>
+            </main>
+        </div>
     </div>
 
     <script src="script.js"></script>
